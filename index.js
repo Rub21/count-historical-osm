@@ -12,8 +12,7 @@ var obj = function() {
                 osm_way1: 0,
                 osm_wayx: 0,
                 osm_relation1: 0,
-                osm_relationx: 0,
-                changeset: []
+                osm_relationx: 0
         };
 };
 
@@ -53,13 +52,16 @@ handler.on('relation', function(relation) {
 });
 
 osmium.apply(reader, handler);
-
-console.log(counter)
-
 var outputFilename = osmfile.split('.')[0] + '.md';
 
-fs.writeFile(outputFilename, JSON.stringify(counter), function(err) {
+var header = 'Year |node v1 | node vx | way v1 | way vx | relation v1 | relation vx \n ---|---|---|---|---|---|---| \n';
+var text = '**20XX**|' + fm(counter.osm_node_v1) + '|' + fm(counter.osm_node_vx) + '|' + fm(counter.osm_way1) + '|' + fm(counter.osm_wayx) + '|' + fm(counter.osm_relation1) + '|' + fm(counter.osm_relationx);
+fs.writeFile(outputFilename, header + text, function(err) {
         if (err) {
                 console.log(err);
         }
 });
+
+function fm(num) {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+}
