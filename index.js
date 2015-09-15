@@ -56,10 +56,10 @@ osmium.apply(reader, handler);
 
 console.log(counter)
 
-// var outputFilename = osmfile.split('.')[0] + '.md';
+var outputFilename = osmfile.split('.')[0] + '.md';
 
-// fs.writeFile(outputFilename, JSON.stringify(geojson), function(err) {
-//  if (err) {
-//   console.log(err);
-//  }
-// });
+fs.writeFile(outputFilename, JSON.stringify(counter), function(err) {
+        if (err) {
+                console.log(err);
+        }
+});
