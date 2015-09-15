@@ -1,8 +1,7 @@
 #!/bin/bash
 while read -r line; do
-    echo wget $line
-    echo decompres ${line##*/}
-    echo bzip2 -d ${line##*/}
+    wget $line
+    bzip2 -d ${line##*/}
     base=${line##*/}
     osmconvert ${base%.*} -B=boundary/gb.poly -o=gb-${base%.*}
     #osmfilter gb-${base%.*} --keep="highway=" -o=highway-gb-${base%.*}
