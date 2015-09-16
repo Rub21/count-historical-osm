@@ -9,6 +9,7 @@
   "dependencies": {
     "optimist": "^0.6.1",
     "osmium": "https://github.com/osmcode/node-osmium/tarball/master",
+    "pg": "^4.4.1",
     "underscore": "^1.8.2"
   },
   "repository": {
