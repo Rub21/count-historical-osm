@@ -27,7 +27,7 @@ var reader = new osmium.Reader(osmfile);
 var handler = new osmium.Handler();
 
 handler.on('node', function(node) {
-        counter.timestamp = node.timestamp_seconds_since_epoch - way.timestamp_seconds_since_epoch % 1000;
+        counter.timestamp = node.timestamp_seconds_since_epoch - node.timestamp_seconds_since_epoch % 1000;
 
         counter.allnodes++;
         if (node.tags().amenity !== undefined || node.tags().leisure !== undefined || node.tags().shop !== undefined) {
