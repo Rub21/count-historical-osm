@@ -75,6 +75,6 @@ chmod 777 pro2014log
 cp ../boundary/gb.poly .
 cp ../index.js .
 echo "bzcat planet-141229.osm.bz2 | osmconvert - -B=boundary/gb.poly -o=gb-planet-141229.osm
-node index.js --osmfile=gb-planet-141229.osm--timestamp=1388534400" > pro2013
+node index.js --osmfile=gb-planet-141229.osm --timestamp=1388534400" > pro2014
 nohup ./pro2014 > pro2014log  2>&1 &
 cd ..
