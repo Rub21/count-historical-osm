@@ -6,8 +6,8 @@ var osmfile = argv.osmfile;
 
 var obj = function() {
         return {
-                timestamp : 0,
-                numfile: osmfile.split('.')[0],                
+                timestamp: 0,
+                numfile: osmfile.split('.')[0],
                 allnodes: 0, //all nodes
                 allways: 0, //all ways
                 allrealtions: 0, //all relations
@@ -27,8 +27,8 @@ var reader = new osmium.Reader(osmfile);
 var handler = new osmium.Handler();
 
 handler.on('node', function(node) {
-        counter.timestamp = node.timestamp_seconds_since_epoch;
-        console.log(counter.timestamp)
+        counter.timestamp = node.timestamp_seconds_since_epoch - way.timestamp_seconds_since_epoch % 1000;
+
         counter.allnodes++;
         if (node.tags().amenity !== undefined || node.tags().leisure !== undefined || node.tags().shop !== undefined) {
                 if (node.version === 1) {
@@ -62,7 +62,7 @@ handler.on('relation', function(relation) {
 
 osmium.apply(reader, handler);
 var outputFilename = osmfile.split('.')[0] + '.json';
-fs.writeFile(outputFilename, JSON.stingify(counter), function(err) {
+fs.writeFile(outputFilename, JSON.stringify(counter), function(err) {
         if (err) {
                 console.log(err);
         }
