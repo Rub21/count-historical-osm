@@ -6,7 +6,7 @@ var osmfile = argv.osmfile;
 
 var obj = function() {
         return {
-                timestamp = 0,
+                timestamp : 0,
                 numfile: osmfile.split('.')[0],                
                 allnodes: 0, //all nodes
                 allways: 0, //all ways
@@ -28,6 +28,7 @@ var handler = new osmium.Handler();
 
 handler.on('node', function(node) {
         counter.timestamp = node.timestamp_seconds_since_epoch;
+        console.log(counter.timestamp)
         counter.allnodes++;
         if (node.tags().amenity !== undefined || node.tags().leisure !== undefined || node.tags().shop !== undefined) {
                 if (node.version === 1) {

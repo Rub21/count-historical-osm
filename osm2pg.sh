@@ -14,7 +14,7 @@ do
     fi 
     echo "Processing file $i"
     gzip -d $i.osc.gz
-    bzcat $i.osc.gz | osmconvert - -B=boundary/$3 -o=$i.osm 
+    osmconvert $i.osc -B=boundary/$3 -o=$i.osm 
     node index.js --osmfile=$i.osm
     ogr2ogr -f "PostgreSQL" PG:"host=localhost user=postgres dbname=dbosm" -append $i.json
     rm $i.osm
