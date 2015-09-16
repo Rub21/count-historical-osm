@@ -58,7 +58,7 @@ handler.on('way', function(way) {
         }
 });
 handler.on('relation', function(relation) {
-        counter.allrealtions++;
+        counter.allrelations++;
         if (relation.tags().highway !== undefined || relation.tags().building !== undefined) {
                 if (relation.version === 1) {
                         counter.relation1++;
