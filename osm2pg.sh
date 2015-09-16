@@ -16,10 +16,8 @@ do
     gzip -d $i.osc.gz
     osmconvert $i.osc -B=boundary/$3 -o=$i.osm 
     node index.js --osmfile=$i.osm
-    ogr2ogr -f "PostgreSQL" PG:"host=localhost user=postgres dbname=dbosm" -append $i.json
     rm $i.osm
     rm $i.osc.gz
-    rm $i.json
     echo "Process completed $i"
 done
 
