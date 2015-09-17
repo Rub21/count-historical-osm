@@ -85,9 +85,8 @@ handler.on('relation', function(relation) {
 });
 
 osmium.apply(reader, handler);
-var fields = 'osm_timestamp,numfile,allnodes1,allnodesx,allways1,allwaysx,allrelations1,allrelationsx,nodev1,nodevx,way1,wayx,relation1,relationx';
+var fields = 'osm_timestamp, numfile, allnodes1, allnodesx, allways1, allwaysx, allrelations1, allrelationsx, nodev1, nodevx, way1, wayx, relation1, relationx';
 var query = 'INSERT INTO osm2014( ' + fields + ') VALUES($1, $2, $3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14);';
-
 var data = [
         counter.osm_timestamp,
         counter.numfile,
