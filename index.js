@@ -20,8 +20,8 @@ var obj = function() {
                 allnodesx: 0, //all nodes
                 allways1: 0,
                 allwaysx: 0, //all ways
-                allrelation1: 0, //all relations
-                allrelationx: 0, //all relations
+                allrelations1: 0, //all relations
+                allrelationsx: 0, //all relations
                 nodev1: 0, //amenity,leisure and shop
                 nodevx: 0, //amenity,leisure and shop
                 way1: 0, //highway and buildings
@@ -70,9 +70,9 @@ handler.on('way', function(way) {
 });
 handler.on('relation', function(relation) {
         if (relation.version === 1) {
-                counter.allrelation1++;
+                counter.allrelations1++;
         } else {
-                counter.allrelationx++;
+                counter.allrelationsx++;
         }
 
         if (relation.tags().highway !== undefined || relation.tags().building !== undefined) {
