@@ -16,7 +16,7 @@ do
     gzip -d $i.osc.gz
     osmconvert $i.osc -B=boundary/$3 -o=$i.osm 
     node index.js --osmfile=$i.osm
-    rm $i.osm
+    echo rm $i.osm
     rm $i.osc.gz
     rm $i.osc
     echo "Process completed $i"
