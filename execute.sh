@@ -1,4 +1,10 @@
 #!/bin/bash
+psql -U postgres -c "DROP database dbosm"
+psql -U postgres -c "create database dbosm";
+psql -U postgres -d dbosm -f /usr/share/postgresql/9.3/contrib/postgis-2.1/postgis.sql
+psql -U postgres -d dbosm -f /usr/share/postgresql/9.3/contrib/postgis-2.1/spatial_ref_sys.sql
+psql --host=localhost --port=5432 --username=postgres --dbname=dbosm -f query/tables.sql
+
 mkdir 2014
 cd 2014
 touch log2014
