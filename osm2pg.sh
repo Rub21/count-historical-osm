@@ -4,18 +4,18 @@ url="http://planet.osm.org/replication/day/000/000/"
 for i in $(seq $1 $2)
 do	       
     if (($i<10)); then
-       echo curl ${url}00$i.osc.gz -o "$i.osc.gz"
+       curl ${url}00$i.osc.gz -o "$i.osc.gz"
     fi
     if (($i<100)) && (($i>=10)); then
-       echo curl ${url}0$i.osc.gz -o "$i.osc.gz"
+       curl ${url}0$i.osc.gz -o "$i.osc.gz"
     fi
     if (($i>=100)); then
-       echo curl $url$i.osc.gz -o "$i.osc.gz"
+       curl $url$i.osc.gz -o "$i.osc.gz"
     fi 
     echo "Processing file $i"
     gzip -d $i.osc.gz
-    osmconvert $i.osc -B=boundary/$3 -o=$i.osm 
-    node index.js --osmfile=$i.osm
+    osmconvert $i.osc -B=boundary/gb.poly -o=$i.osm 
+    node index.js --osmfile=$i.osm --year=$3 # year going to store in osm year
     echo rm $i.osm
     rm $i.osc.gz
     rm $i.osc

@@ -3,6 +3,7 @@ var osmium = require('osmium');
 var argv = require('optimist').argv;
 var _ = require('underscore');
 var osmfile = argv.osmfile;
+var year = argv.year;
 var pg = require('pg');
 var conString = "postgres://postgres:1234@localhost/dbosm";
 var client = new pg.Client(conString);
@@ -39,12 +40,8 @@ var handler = new osmium.Handler();
 
 handler.on('node', function(node) {
         counter.osm_timestamp = node.timestamp_seconds_since_epoch - node.timestamp_seconds_since_epoch % 1000;
-        if (node.version === 1) {
-                counter.allnodes1++;
-        } else {
-                counter.allnodesx++;
-        }
-        if (node.tags().amenity !== undefined || node.tags().leisure !== undefined || node.tags().shop !== undefined) {
+        if (console.log(_.size(node.tags())) > 0) {
+
                 if (node.version === 1) {
                         counter.nodev1++;
                 } else {
@@ -54,39 +51,27 @@ handler.on('node', function(node) {
 });
 
 handler.on('way', function(way) {
+        if (_.size(way.tags())) > 0) {
         if (way.version === 1) {
-                counter.allways1++;
+                counter.way1++;
         } else {
-                counter.allwaysx++;
+                counter.wayx++;
         }
-
-        if (way.tags().highway !== undefined || way.tags().building !== undefined) {
-                if (way.version === 1) {
-                        counter.way1++;
-                } else {
-                        counter.wayx++;
-                }
-        }
+}
 });
 handler.on('relation', function(relation) {
+        if (_.size(relation.tags())) > 0) {
         if (relation.version === 1) {
-                counter.allrelations1++;
+                counter.relation1++;
         } else {
-                counter.allrelationsx++;
+                counter.relationx++;
         }
-
-        if (relation.tags().highway !== undefined || relation.tags().building !== undefined) {
-                if (relation.version === 1) {
-                        counter.relation1++;
-                } else {
-                        counter.relationx++;
-                }
-        }
+}
 });
 
 osmium.apply(reader, handler);
 var fields = 'osm_timestamp, numfile, allnodes1, allnodesx, allways1, allwaysx, allrelations1, allrelationsx, nodev1, nodevx, way1, wayx, relation1, relationx';
-var query = 'INSERT INTO osm2014( ' + fields + ') VALUES($1, $2, $3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14);';
+var query = 'INSERT INTO osm' + year + '( ' + fields + ') VALUES($1, $2, $3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14);';
 var data = [
         counter.osm_timestamp,
         counter.numfile,
