@@ -40,7 +40,7 @@ var handler = new osmium.Handler();
 
 handler.on('node', function(node) {
         counter.osm_timestamp = node.timestamp_seconds_since_epoch - node.timestamp_seconds_since_epoch % 1000;
-        if (console.log(_.size(node.tags()) > 0) {
+        if (_.size(node.tags()) > 0) {
 
                 if (node.version === 1) {
                         counter.nodev1++;
