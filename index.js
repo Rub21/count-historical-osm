@@ -40,7 +40,7 @@ var handler = new osmium.Handler();
 
 handler.on('node', function(node) {
         counter.osm_timestamp = node.timestamp_seconds_since_epoch - node.timestamp_seconds_since_epoch % 1000;
-        if (console.log(_.size(node.tags())) > 0) {
+        if (console.log(_.size(node.tags()) > 0) {
 
                 if (node.version === 1) {
                         counter.nodev1++;
@@ -51,7 +51,7 @@ handler.on('node', function(node) {
 });
 
 handler.on('way', function(way) {
-        if (_.size(way.tags())) > 0) {
+        if (_.size(way.tags()) > 0) {
         if (way.version === 1) {
                 counter.way1++;
         } else {
@@ -60,7 +60,7 @@ handler.on('way', function(way) {
 }
 });
 handler.on('relation', function(relation) {
-        if (_.size(relation.tags())) > 0) {
+        if (_.size(relation.tags()) > 0) {
         if (relation.version === 1) {
                 counter.relation1++;
         } else {
